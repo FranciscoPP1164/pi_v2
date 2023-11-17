@@ -58,7 +58,9 @@ class EventosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $datosEventos=request()->except(['_token','_method']);
+        $respuesta=evento::where('id','=',$id)->update($datosEventos);
+        return response()->json($respuesta);
     }
 
     /**
@@ -66,6 +68,8 @@ class EventosController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $eventos=evento::findOrFail($id);
+        evento::destroy($id);
+        return response()->json($id);
     }
 }
