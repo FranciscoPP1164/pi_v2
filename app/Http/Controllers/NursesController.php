@@ -13,7 +13,7 @@ class NursesController extends Controller
     public function index()
     {
         $nurses = Nurse::all();
-        return view("nurses.index", $nurses);
+        return view("nurses.index", ['nurses' => $nurses]);
     }
 
     /**
@@ -44,7 +44,7 @@ class NursesController extends Controller
      */
     public function show(Nurse $nurse)
     {
-        return view('nurses.show', $nurse);
+        return view('nurses.show', ['nurse' => $nurse]);
     }
 
     /**
@@ -52,7 +52,7 @@ class NursesController extends Controller
      */
     public function edit(Nurse $nurse)
     {
-        return view('nurses.edit', $nurse);
+        return view('nurses.edit', ['nurse' => $nurse]);
     }
 
     /**
@@ -61,17 +61,17 @@ class NursesController extends Controller
     public function update(Request $request, Nurse $nurse)
     {
         $nurseDataToUpdate = $request->validate([
-            'name' => 'nullable|string|bail',
-            'gender' => 'nullable|string|bail',
+            'name' => 'required|string|bail',
+            'gender' => 'required|string|bail',
         ]);
 
         $isNurseUpdated = $nurse->update($nurseDataToUpdate);
 
         if ($isNurseUpdated) {
-            return view('nurses.index')->with('failed');
+            return redirect()->route('nurses.index')->with('failed');
         }
 
-        return view('nurses.index')->with('success');
+        return redirect()->route('nurses.index')->with('success');
     }
 
     /**
@@ -81,6 +81,6 @@ class NursesController extends Controller
     {
         $nurse->delete();
 
-        return view('nurses.index');
+        return redirect()->route('nurses.index')->with('success');
     }
 }

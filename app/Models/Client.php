@@ -12,7 +12,7 @@ class Client extends Model
     use HasFactory;
     use HasUuids;
 
-    protected $fillable = ['name', 'document_type', 'phone'];
+    protected $fillable = ['name', 'identity_document', 'phone'];
 
     public function newUniqueId(): string
     {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientsController;
 use App\Http\Controllers\EventosController;
 
 /*
@@ -14,6 +15,8 @@ use App\Http\Controllers\EventosController;
  */
 
 use App\Http\Controllers\NursesController;
+use App\Http\Controllers\PatientsController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [EventosController::class, 'index'])->middleware('auth');
@@ -24,3 +27,5 @@ Route::resource('eventos', 'App\Http\Controllers\EventosController')->middleware
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('nurses', NursesController::class);
+Route::resource('patients', PatientsController::class);
+Route::resource('clients', ClientsController::class);

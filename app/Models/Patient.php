@@ -12,7 +12,7 @@ class Patient extends Model
     use HasFactory;
     use HasUuids;
 
-    protected $fillable = ['name', 'age', 'document_type', 'direction'];
+    protected $fillable = ['name', 'age', 'identity_document', 'direction'];
 
     public function newUniqueId(): string
     {
