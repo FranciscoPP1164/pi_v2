@@ -4,7 +4,7 @@
     <div class="form-content">
         <img src="app-icon.png" alt="">
 
-        <form action="{{route('login')}}" method="POST">
+        <form action="{{route('register')}}" method="POST">
             @csrf
             <div class="input-form">
                 <label for="nameLogin">Nombre</label>
