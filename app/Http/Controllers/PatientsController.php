@@ -83,7 +83,9 @@ class PatientsController extends Controller
      */
     public function destroy(Patient $patient)
     {
-        $patient->update(['status' => 'inactive']);
+        // $patient->update(['status' => 'inactive']);
+
+        $patient->delete();
 
         return redirect()->route('patients.index')->with('success');
     }
