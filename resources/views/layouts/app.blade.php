@@ -16,6 +16,7 @@
     <!-- Scripts -->
     <script src="{{asset('js/app.js')}}" defer></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    @vite(['resources/css/app.css'])
     
     <!-- Styles -->
     <link rel="stylesheet" href="{{asset('css/app.css') }}">
@@ -26,8 +27,9 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm header-nav">
             <div class="container">
+                <img src="app-icon.png" alt="">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -57,6 +59,11 @@
                                 </li>
                             @endif
                         @else
+                        <div class="loged-header-menu">
+                            <a href="{{route('nurses.index')}}">Enfermeros</a>
+                            <a href="{{route('clients.index')}}">Clientes</a>
+                            <a href="{{route('patients.index')}}">Pacientes</a>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -74,6 +81,7 @@
                                     </form>
                                 </div>
                             </li>
+                        </div>
                         @endguest
                     </ul>
                 </div>

@@ -147,6 +147,26 @@ var url_show="{{url('/eventos/show')}}";
                     success:function(msg){
                         $('#exampleModal').modal('toggle');
                         calendar.refetchEvents();
+                        if (msg==='is-menor') {
+                            alert('No se puede registrar una cita antes de la fecha actual');
+                        }
+
+                        if (msg==='already-exists') {
+                            alert('Este enfermero ya tiene una cita agendada para esta hora');
+                        }
+
+                        if (msg==='nc') {
+                            alert('Este cliente no existe');
+                        }
+
+                        if (msg==='nn') {
+                            alert('Este enfermero no existe');
+                        }
+
+                        if (msg==='np') {
+                            alert('Este paciente no existe');
+                        }
+                        console.log(msg);
                         
                     
                     },
@@ -221,11 +241,25 @@ var url_show="{{url('/eventos/show')}}";
                     <textarea class="form-control" name="txtDescripcion" id="txtDescripcion" cols="30" rows="3"></textarea>
                     </div>
 
+                    {{-- <div class="form-group col-md-4">
+                        <label>Cliente</label>
+                        <input type="text" class="form-control" name="client" id="txtClient">
+                    </div>
+                    
+                    <div class="form-group col-md-4">
+                        <label>Enfermero</label>
+                        <input type="text" class="form-control" name="nurse" id="txtNurse">
+                    </div>
+                    
+                    <div class="form-group col-md-4">
+                        <label>Paciente</label>
+                        <input type="text" class="form-control" name="patient" id="txtPatient">
+                    </div> --}}
+                    
                     <div class="form-group col-md-12">
                     <label>Color</label>
                     <input type="color" class="form-control" name="txtColor" id="txtColor">
                     </div>
-                    
                     
                     </div>
                 <div class="modal-footer">

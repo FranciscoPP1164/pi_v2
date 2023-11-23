@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('identity_document');
             $table->string('phone');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }

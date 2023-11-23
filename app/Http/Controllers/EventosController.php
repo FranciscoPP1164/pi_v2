@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\evento;
 
+use App\Models\evento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EventosController extends Controller
 {
@@ -28,8 +29,47 @@ class EventosController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $datosEvento=request()->except(['_token','_method']);
+        $datosEvento = request()->except(['_token', '_method']);
+
+        $validateDate = Validator::make($datosEvento, [
+            'start' => 'after_or_equal:now',
+        ]);
+
+        if ($validateDate->fails()) {
+            return 'is-menor';
+        }
+
+        // return $datosEvento['client'];
+
+        // $client = Client::where('name', $datosEvento['client'])->first();
+        // $nurse = Nurse::where('name', $datosEvento['nurse'])->first();
+        // $patient = Patient::where('name', $datosEvento['patient'])->first();
+
+        // if (!$client) {
+        //     return 'nc';
+        // }
+
+        // $datosEvento['client_id'] = $client->id;
+
+        // if (!$nurse) {
+        //     return 'nn';
+        // }
+
+        // $datosEvento['nurse_id'] = $nurse->id;
+
+        // if (!$patient) {
+        //     return 'np';
+        // }
+
+        // $datosEvento['patient_id'] = $patient->id;
+
+        // $eventThatMatchWithDate = evento::where('start', $request->start)->where('nurse_id', $nurse->id)->first();
+
+        // if ($eventThatMatchWithDate) {
+        //     return 'already-exists';
+        // }
+
+        // return $datosEvento['start'];
         evento::insert($datosEvento);
         print_r($datosEvento);
     }
@@ -40,8 +80,8 @@ class EventosController extends Controller
     public function show(string $id)
     {
         //
-        $data['eventos']=evento::all();
-        return response()->json ($data['eventos']);
+        $data['eventos'] = evento::all();
+        return response()->json($data['eventos']);
 
     }
 
@@ -58,8 +98,8 @@ class EventosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $datosEventos=request()->except(['_token','_method']);
-        $respuesta=evento::where('id','=',$id)->update($datosEventos);
+        $datosEventos = request()->except(['_token', '_method']);
+        $respuesta = evento::where('id', '=', $id)->update($datosEventos);
         return response()->json($respuesta);
     }
 
@@ -68,7 +108,7 @@ class EventosController extends Controller
      */
     public function destroy(string $id)
     {
-        $eventos=evento::findOrFail($id);
+        $eventos = evento::findOrFail($id);
         evento::destroy($id);
         return response()->json($id);
     }

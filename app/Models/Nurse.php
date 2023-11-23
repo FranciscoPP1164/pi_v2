@@ -12,7 +12,7 @@ class Nurse extends Model
     use HasFactory;
     use HasUuids;
 
-    protected $fillable = ['name', 'gender'];
+    protected $fillable = ['name', 'gender', 'status'];
 
     public function newUniqueId(): string
     {

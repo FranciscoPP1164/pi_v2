@@ -13,13 +13,15 @@ return new class extends Migration
     {
         Schema::create('eventos', function (Blueprint $table) {
             $table->id();
-            $table->string('title',255);
+            $table->string('title', 255);
             $table->text('description');
-            $table->string('color',20);
-            $table->string('textColor',20);
+            $table->string('color', 20);
+            $table->string('textColor', 20);
             $table->dateTime('start');
             $table->dateTime('end');
-
+            $table->foreignUuid('client_id')->constrained();
+            $table->foreignUuid('nurse_id')->constrained();
+            $table->foreignUuid('patient_id')->constrained();
             $table->timestamps();
         });
     }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('age');
             $table->string('identity_document');
             $table->string('direction');
+            $table->enum('status', ['active', 'inactive'])->default('active');
             $table->timestamps();
         });
     }

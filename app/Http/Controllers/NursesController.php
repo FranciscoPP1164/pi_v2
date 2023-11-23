@@ -79,7 +79,7 @@ class NursesController extends Controller
      */
     public function destroy(Nurse $nurse)
     {
-        $nurse->delete();
+        $nurse->update(['status' => 'inactive']);
 
         return redirect()->route('nurses.index')->with('success');
     }
