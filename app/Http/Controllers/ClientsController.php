@@ -81,7 +81,7 @@ class ClientsController extends Controller
      */
     public function destroy(Client $client)
     {
-        $client->delete();
+        $client->update(['status' => 'inactive']);
 
         return redirect()->route('clients.index')->with('success');
     }
